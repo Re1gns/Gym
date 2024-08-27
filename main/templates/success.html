@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+    <!-- Main Start -->
+    <main>
+		<!-- Services -->
+		<section class="container my-4">
+			<h3 class="text-success"> Payment successful, thank you for your patronage</h3>
+		</section>
+		<!-- End -->
+    </main>
+    <!-- End -->
+	<script>
+		// Wait for 2 seconds (2000 milliseconds) and then redirect to the pricing page
+		setTimeout(function() {
+		  window.location.href = "{% url 'pricing' %}";
+		}, 2000);
+	  </script>
+{% endblock %}
