@@ -82,17 +82,30 @@ ASGI_APPLICATION = 'GymManagementSystem.asgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+
+
+#import dj_database_url
+
+#import os
+import dj_database_url
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'gym',
-        'USER': 're1gns',
-        'PASSWORD': 'admin',
-        'HOST' : '127.0.0.1',
-        'PORT':5432
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'gym_sm8j',
+        'USER': 'gym_sm8j_user',
+        'PASSWORD': 'ZXF9hnUkXcl5u7zVU5zGlXDIhCrX9UDb',
+        'HOST': 'dpg-cr72orl6l47c7382qqfg-a.oregon-postgres.render.com',
+        'PORT': '5432',
+        'OPTIONS': {
+            'sslmode': 'require',  # Ensure that SSL is required
+        },
     }
 }
-
+ALLOWED_HOSTS = []
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
