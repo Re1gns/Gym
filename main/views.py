@@ -1,4 +1,3 @@
-import os
 from django.shortcuts import render, redirect, get_object_or_404
 from . import models, forms
 import stripe
@@ -127,13 +126,6 @@ def checkout_session(request, plan_id):
         selected_validity = int(request.POST.get('validity'))
         unit_amount *= selected_validity
 
-        if os.getenv('DJANGO_PRODUCTION') == 'True':
-                success_url = 'https://gymmanagementsys.onrender.com/payment_success?session_id={CHECKOUT_SESSION_ID}'
-                cancel_url = 'https://gymmanagementsys.onrender.com/payment_cancel'
-        else:
-            success_url = 'http://127.0.0.1:8000/payment_success?session_id={CHECKOUT_SESSION_ID}'
-            cancel_url = 'http://127.0.0.1:8000/payment_cancel'
-
         session = stripe.checkout.Session.create(
             line_items=[{
                 'price_data': {
@@ -146,8 +138,8 @@ def checkout_session(request, plan_id):
                 'quantity': 1,
             }],    
             mode='payment',
-            success_url=success_url,
-            cancel_url=cancel_url,
+            success_url = 'https://gymmanagementsys.onrender.com/payment_success?session_id={CHECKOUT_SESSION_ID}',
+            cancel_url = 'https://gymmanagementsys.onrender.com/payment_cancel',
             client_reference_id=plan_id,
         )
 
